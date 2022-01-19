@@ -1,5 +1,5 @@
 # book_read_logs
-books should i read/have read
+books that i have to read/been reading/read.
 
 ## ルール
 
