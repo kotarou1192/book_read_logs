@@ -1,6 +1,8 @@
 # book_read_logs
 books that i have to read/been reading/read.
 
+このリポジトリはあくまで個人の感想です。
+
 ## ルール
 
 ### 本を買ったら
