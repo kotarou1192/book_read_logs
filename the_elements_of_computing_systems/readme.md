@@ -24,3 +24,7 @@ NANDだけでNOT, OR, ANDを作成できる！
 単純な16bit版ゲートはGenNBitGate.rbで部品を自動生成した。  
 
 ### 2章
+
+bit加算器とALUを作る。  
+サンプルは./src/adders/以下にある。  
+とてもしんどかったが楽しかった。  
