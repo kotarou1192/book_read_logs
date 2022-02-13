@@ -1,0 +1,44 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/b/RAM16K.hdl
+
+/**
+ * Memory of 16K registers, each 16 bit-wide. Out holds the value
+ * stored at the memory location specified by address. If load==1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out from the next time step onward).
+ */
+
+CHIP RAM16K {
+    IN in[16], load, address[14];
+    OUT out[16];
+
+    PARTS:
+    // write selector
+    DMux4Way(in=load, sel=address[0..1], a=w1, b=w2, c=w3, d=w4);
+    // RAM mapper
+    DMux4Way(in=in[0], sel=address[0..1], a=r1w1, b=r2w1, c=r3w1, d=r4w1);
+    DMux4Way(in=in[1], sel=address[0..1], a=r1w2, b=r2w2, c=r3w2, d=r4w2);
+    DMux4Way(in=in[2], sel=address[0..1], a=r1w3, b=r2w3, c=r3w3, d=r4w3);
+    DMux4Way(in=in[3], sel=address[0..1], a=r1w4, b=r2w4, c=r3w4, d=r4w4);
+    DMux4Way(in=in[4], sel=address[0..1], a=r1w5, b=r2w5, c=r3w5, d=r4w5);
+    DMux4Way(in=in[5], sel=address[0..1], a=r1w6, b=r2w6, c=r3w6, d=r4w6);
+    DMux4Way(in=in[6], sel=address[0..1], a=r1w7, b=r2w7, c=r3w7, d=r4w7);
+    DMux4Way(in=in[7], sel=address[0..1], a=r1w8, b=r2w8, c=r3w8, d=r4w8);
+    DMux4Way(in=in[8], sel=address[0..1], a=r1w9, b=r2w9, c=r3w9, d=r4w9);
+    DMux4Way(in=in[9], sel=address[0..1], a=r1w10, b=r2w10, c=r3w10, d=r4w10);
+    DMux4Way(in=in[10], sel=address[0..1], a=r1w11, b=r2w11, c=r3w11, d=r4w11);
+    DMux4Way(in=in[11], sel=address[0..1], a=r1w12, b=r2w12, c=r3w12, d=r4w12);
+    DMux4Way(in=in[12], sel=address[0..1], a=r1w13, b=r2w13, c=r3w13, d=r4w13);
+    DMux4Way(in=in[13], sel=address[0..1], a=r1w14, b=r2w14, c=r3w14, d=r4w14);
+    DMux4Way(in=in[14], sel=address[0..1], a=r1w15, b=r2w15, c=r3w15, d=r4w15);
+    DMux4Way(in=in[15], sel=address[0..1], a=r1w16, b=r2w16, c=r3w16, d=r4w16);
+    // RAMs
+    RAM4K(in[0]=r1w1, in[1]=r1w2, in[2]=r1w3, in[3]=r1w4, in[4]=r1w5, in[5]=r1w6, in[6]=r1w7, in[7]=r1w8, in[8]=r1w9, in[9]=r1w10, in[10]=r1w11, in[11]=r1w12, in[12]=r1w13, in[13]=r1w14, in[14]=r1w15, in[15]=r1w16, address=address[2..13], load=w1, out=out1);
+    RAM4K(in[0]=r2w1, in[1]=r2w2, in[2]=r2w3, in[3]=r2w4, in[4]=r2w5, in[5]=r2w6, in[6]=r2w7, in[7]=r2w8, in[8]=r2w9, in[9]=r2w10, in[10]=r2w11, in[11]=r2w12, in[12]=r2w13, in[13]=r2w14, in[14]=r2w15, in[15]=r2w16, address=address[2..13], load=w2, out=out2);
+    RAM4K(in[0]=r3w1, in[1]=r3w2, in[2]=r3w3, in[3]=r3w4, in[4]=r3w5, in[5]=r3w6, in[6]=r3w7, in[7]=r3w8, in[8]=r3w9, in[9]=r3w10, in[10]=r3w11, in[11]=r3w12, in[12]=r3w13, in[13]=r3w14, in[14]=r3w15, in[15]=r3w16, address=address[2..13], load=w3, out=out3);
+    RAM4K(in[0]=r4w1, in[1]=r4w2, in[2]=r4w3, in[3]=r4w4, in[4]=r4w5, in[5]=r4w6, in[6]=r4w7, in[7]=r4w8, in[8]=r4w9, in[9]=r4w10, in[10]=r4w11, in[11]=r4w12, in[12]=r4w13, in[13]=r4w14, in[14]=r4w15, in[15]=r4w16, address=address[2..13], load=w4, out=out4);
+    // out router
+    Mux4Way16(a=out1, b=out2, c=out3, d=out4, sel=address[0..1], out=out);
+}

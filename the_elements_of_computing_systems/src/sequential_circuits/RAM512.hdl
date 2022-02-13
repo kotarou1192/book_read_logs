@@ -1,0 +1,48 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/03/b/RAM512.hdl
+
+/**
+ * Memory of 512 registers, each 16 bit-wide. Out holds the value
+ * stored at the memory location specified by address. If load==1, then 
+ * the in value is loaded into the memory location specified by address 
+ * (the loaded value will be emitted to out from the next time step onward).
+ */
+
+CHIP RAM512 {
+    IN in[16], load, address[9];
+    OUT out[16];
+
+    PARTS:
+    // write selector
+    DMux8Way(in=load, sel=address[0..2], a=w1, b=w2, c=w3, d=w4, e=w5, f=w6, g=w7, h=w8);
+    // RAM mapper
+    DMux8Way(in=in[0], sel=address[0..2], a=r1w1, b=r2w1, c=r3w1, d=r4w1, e=r5w1, f=r6w1, g=r7w1, h=r8w1);
+    DMux8Way(in=in[1], sel=address[0..2], a=r1w2, b=r2w2, c=r3w2, d=r4w2, e=r5w2, f=r6w2, g=r7w2, h=r8w2);
+    DMux8Way(in=in[2], sel=address[0..2], a=r1w3, b=r2w3, c=r3w3, d=r4w3, e=r5w3, f=r6w3, g=r7w3, h=r8w3);
+    DMux8Way(in=in[3], sel=address[0..2], a=r1w4, b=r2w4, c=r3w4, d=r4w4, e=r5w4, f=r6w4, g=r7w4, h=r8w4);
+    DMux8Way(in=in[4], sel=address[0..2], a=r1w5, b=r2w5, c=r3w5, d=r4w5, e=r5w5, f=r6w5, g=r7w5, h=r8w5);
+    DMux8Way(in=in[5], sel=address[0..2], a=r1w6, b=r2w6, c=r3w6, d=r4w6, e=r5w6, f=r6w6, g=r7w6, h=r8w6);
+    DMux8Way(in=in[6], sel=address[0..2], a=r1w7, b=r2w7, c=r3w7, d=r4w7, e=r5w7, f=r6w7, g=r7w7, h=r8w7);
+    DMux8Way(in=in[7], sel=address[0..2], a=r1w8, b=r2w8, c=r3w8, d=r4w8, e=r5w8, f=r6w8, g=r7w8, h=r8w8);
+    DMux8Way(in=in[8], sel=address[0..2], a=r1w9, b=r2w9, c=r3w9, d=r4w9, e=r5w9, f=r6w9, g=r7w9, h=r8w9);
+    DMux8Way(in=in[9], sel=address[0..2], a=r1w10, b=r2w10, c=r3w10, d=r4w10, e=r5w10, f=r6w10, g=r7w10, h=r8w10);
+    DMux8Way(in=in[10], sel=address[0..2], a=r1w11, b=r2w11, c=r3w11, d=r4w11, e=r5w11, f=r6w11, g=r7w11, h=r8w11);
+    DMux8Way(in=in[11], sel=address[0..2], a=r1w12, b=r2w12, c=r3w12, d=r4w12, e=r5w12, f=r6w12, g=r7w12, h=r8w12);
+    DMux8Way(in=in[12], sel=address[0..2], a=r1w13, b=r2w13, c=r3w13, d=r4w13, e=r5w13, f=r6w13, g=r7w13, h=r8w13);
+    DMux8Way(in=in[13], sel=address[0..2], a=r1w14, b=r2w14, c=r3w14, d=r4w14, e=r5w14, f=r6w14, g=r7w14, h=r8w14);
+    DMux8Way(in=in[14], sel=address[0..2], a=r1w15, b=r2w15, c=r3w15, d=r4w15, e=r5w15, f=r6w15, g=r7w15, h=r8w15);
+    DMux8Way(in=in[15], sel=address[0..2], a=r1w16, b=r2w16, c=r3w16, d=r4w16, e=r5w16, f=r6w16, g=r7w16, h=r8w16);
+    // RAMs
+    RAM64(in[0]=r1w1, in[1]=r1w2, in[2]=r1w3, in[3]=r1w4, in[4]=r1w5, in[5]=r1w6, in[6]=r1w7, in[7]=r1w8, in[8]=r1w9, in[9]=r1w10, in[10]=r1w11, in[11]=r1w12, in[12]=r1w13, in[13]=r1w14, in[14]=r1w15, in[15]=r1w16, address=address[3..8], load=w1, out=out1);
+    RAM64(in[0]=r2w1, in[1]=r2w2, in[2]=r2w3, in[3]=r2w4, in[4]=r2w5, in[5]=r2w6, in[6]=r2w7, in[7]=r2w8, in[8]=r2w9, in[9]=r2w10, in[10]=r2w11, in[11]=r2w12, in[12]=r2w13, in[13]=r2w14, in[14]=r2w15, in[15]=r2w16, address=address[3..8], load=w2, out=out2);
+    RAM64(in[0]=r3w1, in[1]=r3w2, in[2]=r3w3, in[3]=r3w4, in[4]=r3w5, in[5]=r3w6, in[6]=r3w7, in[7]=r3w8, in[8]=r3w9, in[9]=r3w10, in[10]=r3w11, in[11]=r3w12, in[12]=r3w13, in[13]=r3w14, in[14]=r3w15, in[15]=r3w16, address=address[3..8], load=w3, out=out3);
+    RAM64(in[0]=r4w1, in[1]=r4w2, in[2]=r4w3, in[3]=r4w4, in[4]=r4w5, in[5]=r4w6, in[6]=r4w7, in[7]=r4w8, in[8]=r4w9, in[9]=r4w10, in[10]=r4w11, in[11]=r4w12, in[12]=r4w13, in[13]=r4w14, in[14]=r4w15, in[15]=r4w16, address=address[3..8], load=w4, out=out4);
+    RAM64(in[0]=r5w1, in[1]=r5w2, in[2]=r5w3, in[3]=r5w4, in[4]=r5w5, in[5]=r5w6, in[6]=r5w7, in[7]=r5w8, in[8]=r5w9, in[9]=r5w10, in[10]=r5w11, in[11]=r5w12, in[12]=r5w13, in[13]=r5w14, in[14]=r5w15, in[15]=r5w16, address=address[3..8], load=w5, out=out5);
+    RAM64(in[0]=r6w1, in[1]=r6w2, in[2]=r6w3, in[3]=r6w4, in[4]=r6w5, in[5]=r6w6, in[6]=r6w7, in[7]=r6w8, in[8]=r6w9, in[9]=r6w10, in[10]=r6w11, in[11]=r6w12, in[12]=r6w13, in[13]=r6w14, in[14]=r6w15, in[15]=r6w16, address=address[3..8], load=w6, out=out6);
+    RAM64(in[0]=r7w1, in[1]=r7w2, in[2]=r7w3, in[3]=r7w4, in[4]=r7w5, in[5]=r7w6, in[6]=r7w7, in[7]=r7w8, in[8]=r7w9, in[9]=r7w10, in[10]=r7w11, in[11]=r7w12, in[12]=r7w13, in[13]=r7w14, in[14]=r7w15, in[15]=r7w16, address=address[3..8], load=w7, out=out7);
+    RAM64(in[0]=r8w1, in[1]=r8w2, in[2]=r8w3, in[3]=r8w4, in[4]=r8w5, in[5]=r8w6, in[6]=r8w7, in[7]=r8w8, in[8]=r8w9, in[9]=r8w10, in[10]=r8w11, in[11]=r8w12, in[12]=r8w13, in[13]=r8w14, in[14]=r8w15, in[15]=r8w16, address=address[3..8], load=w8, out=out8);
+    // out router
+    Mux8Way16(a=out1, b=out2, c=out3, d=out4, e=out5, f=out6, g=out7, h=out8, sel=address[0..2], out=out);
+}

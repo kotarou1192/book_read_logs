@@ -1,0 +1,68 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/Register.hdl
+
+/**
+ * 16-bit register:
+ * If load[t] == 1 then out[t+1] = in[t]
+ * else out does not change
+ */
+
+CHIP Register {
+    IN in[16], load;
+    OUT out[16];
+
+    PARTS:
+    Mux16(
+    a[0]=outw1,
+    a[1]=outw2,
+    a[2]=outw3,
+    a[3]=outw4,
+    a[4]=outw5,
+    a[5]=outw6,
+    a[6]=outw7,
+    a[7]=outw8,
+    a[8]=outw9,
+    a[9]=outw10,
+    a[10]=outw11,
+    a[11]=outw12,
+    a[12]=outw13,
+    a[13]=outw14,
+    a[14]=outw15,
+    a[15]=outw16,
+    b=in, sel=load,
+    out[0]=w1,
+    out[1]=w2,
+    out[2]=w3,
+    out[3]=w4,
+    out[4]=w5,
+    out[5]=w6,
+    out[6]=w7,
+    out[7]=w8,
+    out[8]=w9,
+    out[9]=w10,
+    out[10]=w11,
+    out[11]=w12,
+    out[12]=w13,
+    out[13]=w14,
+    out[14]=w15,
+    out[15]=w16
+    );
+    Bit(in=w1, load=load, out=outw1, out=out[0]);
+    Bit(in=w2, load=load, out=outw2, out=out[1]);
+    Bit(in=w3, load=load, out=outw3, out=out[2]);
+    Bit(in=w4, load=load, out=outw4, out=out[3]);
+    Bit(in=w5, load=load, out=outw5, out=out[4]);
+    Bit(in=w6, load=load, out=outw6, out=out[5]);
+    Bit(in=w7, load=load, out=outw7, out=out[6]);
+    Bit(in=w8, load=load, out=outw8, out=out[7]);
+    Bit(in=w9, load=load, out=outw9, out=out[8]);
+    Bit(in=w10, load=load, out=outw10, out=out[9]);
+    Bit(in=w11, load=load, out=outw11, out=out[10]);
+    Bit(in=w12, load=load, out=outw12, out=out[11]);
+    Bit(in=w13, load=load, out=outw13, out=out[12]);
+    Bit(in=w14, load=load, out=outw14, out=out[13]);
+    Bit(in=w15, load=load, out=outw15, out=out[14]);
+    Bit(in=w16, load=load, out=outw16, out=out[15]);
+}
