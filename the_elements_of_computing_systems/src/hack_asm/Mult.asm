@@ -1,0 +1,27 @@
+    @R0
+    D=M
+    @cnt
+    M=D+1
+    @sum
+    M=0
+(LOOP)
+    @cnt
+    MD=M-1
+    @OUT
+    D;JEQ
+    @R1
+    D=M
+    @sum
+    M=M+D
+    @LOOP
+    0;JMP
+(OUT)
+    @sum
+    D=M
+    @R2
+    M=D
+    @END
+    0;JMP
+(END)
+    @END
+    0;JMP

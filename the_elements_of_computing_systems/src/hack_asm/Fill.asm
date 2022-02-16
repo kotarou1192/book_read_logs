@@ -1,0 +1,84 @@
+    @r
+    M=0
+    @15
+    D=A
+    @c
+    M=D
+(LOOP)
+    @r
+    M=0
+    @15
+    D=A
+    @c
+    M=D
+    @KBD
+    D=M
+    @FILL_START
+    D;JNE
+    @FILL_START
+    0;JMP
+(FILL_START)
+    @r
+    D=M
+    @32
+    D=A-D
+    @LOOP
+    D;JEQ
+    @32
+    D=A
+    @R0
+    M=D
+    @r
+    D=M
+    @R1
+    M=D
+    @MULT
+    0;JMP
+(CONTINUE_FILL)
+    @15
+    D=A
+    @c
+    M=D
+    @FILL_START
+    0;JMP
+(FILL_LINE)
+    @c
+    D=M
+    @CONTINUE_FILL
+    D;JLT
+    @R2
+    D=M+D
+    @SCREEN
+    A=A+D
+    M=!M
+    @c
+    M=M-1
+    @FILL_LINE
+    0;JMP
+(MULT)
+    @R0
+    D=M
+    @cnt
+    M=D+1
+    @sum
+    M=0
+(M_LOOP)
+    @cnt
+    MD=M-1
+    @SUMMARY
+    D;JEQ
+    @R1
+    D=M
+    @sum
+    M=M+D
+    @M_LOOP
+    0;JMP
+(SUMMARY)
+    @sum
+    D=M
+    @R2
+    M=D
+    @r
+    M=M+1
+    @FILL_LINE
+    0;JMP
